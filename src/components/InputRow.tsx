@@ -74,40 +74,17 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
 
       {/* Chart type and colors */}
       <div className="flex items-center justify-between">
-        {/* Chart type icons */}
         <ChartSelector
           chartType={arrayData.chartType}
           onChange={(type) => updateArray(arrayData.id, 'chartType', type)}
         />
 
-        {/* Color picker - split circle */}
-        <div className="relative">
-          <div 
-            className="w-8 h-8 rounded-full border-2 border-white shadow-md cursor-pointer hover:scale-110 transition-transform"
-            style={{ background: arrayData.positiveColor }}
-          >
-            <input
-              type="color"
-              value={arrayData.positiveColor}
-              onChange={(e) => updateArray(arrayData.id, 'positiveColor', e.target.value)}
-              className="absolute opacity-0 w-full h-full cursor-pointer"
-              title="Positive values color"
-            />
-          </div>
-          {/* Small indicator for negative color */}
-          <div 
-            className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full border border-white cursor-pointer hover:scale-125 transition-transform"
-            style={{ backgroundColor: arrayData.negativeColor }}
-          >
-            <input
-              type="color"
-              value={arrayData.negativeColor}
-              onChange={(e) => updateArray(arrayData.id, 'negativeColor', e.target.value)}
-              className="absolute opacity-0 w-full h-full cursor-pointer"
-              title="Negative values color"
-            />
-          </div>
-        </div>
+        <ColorPicker
+          primaryColor={arrayData.positiveColor}
+          onChangePrimary={(color) => updateArray(arrayData.id, 'positiveColor', color)}
+          secondaryColor={arrayData.negativeColor}
+          onChangeSecondary={(color) => updateArray(arrayData.id, 'negativeColor', color)}
+        />
       </div>
 
       {/* Array summary */}
@@ -124,6 +101,38 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
 }
 
 export default InputRow;
+
+const ColorPicker = ({ primaryColor, onChangePrimary, secondaryColor, onChangeSecondary }) => {
+  return (
+    <div className="relative">
+      <div 
+        className="w-8 h-8 rounded-full border-2 border-white shadow-md cursor-pointer hover:scale-110 transition-transform"
+        style={{ background: primaryColor }}
+      >
+        <input
+          type="color"
+          value={primaryColor}
+          onChange={(e) => onChangePrimary(e.target.value)}
+          className="absolute opacity-0 w-full h-full cursor-pointer"
+          title="Positive values color"
+        />
+      </div>
+      {/* Small indicator for negative color */}
+      <div 
+        className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full border border-white cursor-pointer hover:scale-125 transition-transform"
+        style={{ backgroundColor: secondaryColor }}
+      >
+        <input
+          type="color"
+          value={secondaryColor}
+          onChange={(e) => onChangeSecondary(e.target.value)}
+          className="absolute opacity-0 w-full h-full cursor-pointer"
+          title="Negative values color"
+        />
+      </div>
+    </div>
+  );
+};
 
 const ChartSelector = ({ chartType, onChange }) => {
   const getChartIcon = (type) => {
