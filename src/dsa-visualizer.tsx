@@ -244,9 +244,7 @@ const DSAVisualizer = () => {
 
   return (
     <div className="mx-auto p-6 bg-gray-50 min-h-screen">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {/* Input Controls Panel */}
           <div className="lg:col-span-1 space-y-4">
             <div className="flex justify-between items-center">
@@ -398,32 +396,9 @@ const DSAVisualizer = () => {
 
           {/* Graphing Area */}
           <div className="lg:col-span-2 xl:col-span-3">
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">Visualization Space</h3>
-              <div className="bg-gray-50 border rounded-lg p-4">
-                <svg ref={svgRef} className="w-full"></svg>
-              </div>
-              
-              {/* Legend */}
-              <div className="mt-4 flex flex-wrap gap-4">
-                {arrays.filter(arr => arr.visible && arr.data.length > 0).map(arrayData => (
-                  <div key={arrayData.id} className="flex items-center gap-2">
-                    <div 
-                      className="w-4 h-4 rounded border"
-                      style={{ backgroundColor: arrayData.positiveColor }}
-                    ></div>
-                    <span className="text-sm text-gray-600">{arrayData.name}</span>
-                    <span className="text-xs text-gray-400">({arrayData.chartType})</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <svg ref={svgRef} className="w-full"></svg>
           </div>
         </div>
-
-        
-        
-      </div>
     </div>
   );
 };
