@@ -30,6 +30,16 @@ const DSAVisualizer = () => {
     setArrays([...arrays, newArray]);
   };
 
+  const removeArray = (id) => {
+    if (arrays.length <= 1) return;
+    setArrays(arrays => arrays.filter(arr => arr.id !== id));
+  };
+
+  const updateArray = (id, field, value) => {
+    setArrays(arrays => arrays.map(arr => 
+      arr.id === id ? { ...arr, [field]: value } : arr
+    ));
+  };
 
 
   return (
@@ -49,7 +59,13 @@ const DSAVisualizer = () => {
           </div>
 
           <div className="space-y-3 max-h-auto overflow-y-auto">
-            {arrays.map((arrayData) => <InputRow key={arrayData.id} arrayData={arrayData} setArrays={setArrays} />)}
+            {arrays.map((arrayData) => <InputRow
+              key={arrayData.id}
+              arrayData={arrayData}
+              removeArray={removeArray}
+              updateArray={updateArray}
+              showTrash={arrays.length > 1}
+            />)}
           </div>
 
           <FutureFeatures />
@@ -77,17 +93,7 @@ const FutureFeatures = () => {
   );
 }
 
-const InputRow = ({arrayData, setArrays}) => {
-  const removeArray = (id) => {
-    setArrays(arrays => arrays.filter(arr => arr.id !== id));
-  };
-
-  const updateArray = (id, field, value) => {
-    setArrays(arrays => arrays.map(arr => 
-      arr.id === id ? { ...arr, [field]: value } : arr
-    ));
-  };
-
+const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
   const handleArrayDataInput = (id, value) => {
     try {
       const newData = value.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
@@ -135,13 +141,16 @@ const InputRow = ({arrayData, setArrays}) => {
           >
             {arrayData.visible ? <Eye size={16} /> : <EyeOff size={16} />}
           </button>
-          <button
-            onClick={() => removeArray(arrayData.id)}
-            className="p-1.5 text-red-500 hover:bg-red-50 rounded transition-colors"
-            title="Delete array"
-          >
-            <Trash2 size={16} />
-          </button>
+          { showTrash && (
+            <button
+              onClick={() => removeArray(arrayData.id)}
+              className="p-1.5 text-red-500 hover:bg-red-50 rounded transition-colors"
+              title="Delete array"
+            >
+              <Trash2 size={16} />
+            </button>
+          )}
+          
         </div>
       </div>
 
