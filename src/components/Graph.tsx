@@ -65,7 +65,7 @@ const Graph = ({arrays}) => {
     // Axes
     container.append("g")
       .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(xScale).tickFormat(d => `[${Math.round(d)}]`));
+      .call(d3.axisBottom(xScale).ticks(maxLength).tickFormat(d => `[${Math.round(d)}]`));
 
     container.append("g")
       .call(d3.axisLeft(yScale));
