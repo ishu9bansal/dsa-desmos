@@ -31,7 +31,7 @@ const Graph = ({arrays}) => {
 
     // Scales
     const xScale = d3.scaleLinear()
-      .domain([0, maxLength - 1])
+      .domain([-1, maxLength])
       .range([0, width]);
 
     const yScale = d3.scaleLinear()
@@ -65,7 +65,7 @@ const Graph = ({arrays}) => {
     // Axes
     container.append("g")
       .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(xScale).ticks(maxLength).tickFormat(d => `[${Math.round(d)}]`));
+      .call(d3.axisBottom(xScale).ticks(maxLength+2).tickFormat(d => `[${Math.round(d)}]`));
 
     container.append("g")
       .call(d3.axisLeft(yScale));
