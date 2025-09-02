@@ -246,7 +246,7 @@ const DSAVisualizer = () => {
     <div className="mx-auto p-6 bg-gray-50 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {/* Input Controls Panel */}
-        <div className="lg:col-span-1 space-y-4">
+        <div className="lg:col-span-1 space-y-4 max-h-screen overflow-scroll">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold text-gray-700">Array Inputs</h3>
             <button
