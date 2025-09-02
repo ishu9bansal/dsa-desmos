@@ -75,14 +75,10 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
       {/* Chart type and colors */}
       <div className="flex items-center justify-between">
         {/* Chart type icons */}
-        <div className="flex items-center gap-1">
-          {['bar', 'line', 'area'].map(type => <ChartButton
-            key={type}
-            type={type}
-            active={arrayData.chartType === type}
-            onClick={() => updateArray(arrayData.id, 'chartType', type)}
-          />)}
-        </div>
+        <ChartSelector
+          chartType={arrayData.chartType}
+          onChange={(type) => updateArray(arrayData.id, 'chartType', type)}
+        />
 
         {/* Color picker - split circle */}
         <div className="relative">
@@ -129,7 +125,7 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
 
 export default InputRow;
 
-const ChartButton = ({ type, active, onClick }) => {
+const ChartSelector = ({ chartType, onChange }) => {
   const getChartIcon = (type) => {
     switch(type) {
       case 'bar': return BarChart3;
@@ -138,7 +134,20 @@ const ChartButton = ({ type, active, onClick }) => {
       default: return BarChart3;
     }
   };
-  const IconComponent = getChartIcon(type);
+  return (
+    <div className="flex items-center gap-1">
+      {['bar', 'line', 'area'].map(type => <ChartButton
+        key={type}
+        type={type}
+        active={chartType === type}
+        onClick={() => onChange(type)}
+        IconComponent={getChartIcon(type)}
+      />)}
+    </div>
+  );
+}
+
+const ChartButton = ({ type, active, onClick, IconComponent }) => {
   return (
     <button
       onClick={onClick}
