@@ -245,10 +245,8 @@ const DSAVisualizer = () => {
   return (
     <div className="mx-auto p-6 bg-gray-50 min-h-screen">
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">DSA Visualization Framework</h1>
-        <p className="text-gray-600 mb-6">Multi-array interactive visualizations for data structures and algorithms</p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {/* Input Controls Panel */}
           <div className="lg:col-span-1 space-y-4">
             <div className="flex justify-between items-center">
@@ -394,10 +392,12 @@ const DSAVisualizer = () => {
                 </div>
               ))}
             </div>
+
+            <FutureFeatures />
           </div>
 
           {/* Graphing Area */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 xl:col-span-3">
             <div className="bg-white border-2 border-gray-200 rounded-lg p-4">
               <h3 className="text-lg font-semibold text-gray-700 mb-4">Visualization Space</h3>
               <div className="bg-gray-50 border rounded-lg p-4">
@@ -421,7 +421,7 @@ const DSAVisualizer = () => {
           </div>
         </div>
 
-        <FutureFeatures />
+        
         
       </div>
     </div>
