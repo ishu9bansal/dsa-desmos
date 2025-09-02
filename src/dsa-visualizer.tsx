@@ -243,7 +243,7 @@ const DSAVisualizer = () => {
   }, [arrays]);
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gray-50 min-h-screen">
+    <div className="mx-auto p-6 bg-gray-50 min-h-screen">
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">DSA Visualization Framework</h1>
         <p className="text-gray-600 mb-6">Multi-array interactive visualizations for data structures and algorithms</p>
@@ -421,16 +421,22 @@ const DSAVisualizer = () => {
           </div>
         </div>
 
-        {/* Future Features Preview */}
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-          <h3 className="text-lg font-semibold text-blue-800 mb-2">🚀 Next: Pointers & Markers</h3>
-          <div className="text-sm text-blue-700">
-            Coming soon: Interactive pointers at specific indexes, range selections, and algorithm step visualization!
-          </div>
-        </div>
+        <FutureFeatures />
+        
       </div>
     </div>
   );
 };
 
 export default DSAVisualizer;
+
+const FutureFeatures = () => {
+  return (
+    <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+      <h3 className="text-lg font-semibold text-blue-800 mb-2">🚀 Next: Pointers & Markers</h3>
+      <div className="text-sm text-blue-700">
+        Coming soon: Interactive pointers at specific indexes, range selections, and algorithm step visualization!
+      </div>
+    </div>
+  );
+}
