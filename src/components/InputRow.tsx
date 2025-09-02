@@ -16,15 +16,6 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
     updateArray(id, 'data', newData);
   };
 
-  const getChartIcon = (type) => {
-    switch(type) {
-      case 'bar': return BarChart3;
-      case 'line': return TrendingUp;
-      case 'area': return Mountain;
-      default: return BarChart3;
-    }
-  };
-
   return (
     <div key={arrayData.id} className="border rounded-lg p-4 bg-white shadow-sm">
       {/* Header with name and controls */}
@@ -85,23 +76,12 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
       <div className="flex items-center justify-between">
         {/* Chart type icons */}
         <div className="flex items-center gap-1">
-          {['bar', 'line', 'area'].map(type => {
-            const IconComponent = getChartIcon(type);
-            return (
-              <button
-                key={type}
-                onClick={() => updateArray(arrayData.id, 'chartType', type)}
-                className={`p-2 rounded-md transition-all ${
-                  arrayData.chartType === type 
-                    ? 'bg-blue-50 text-blue-600 shadow-sm' 
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
-                }`}
-                title={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
-              >
-                <IconComponent size={16} />
-              </button>
-            );
-          })}
+          {['bar', 'line', 'area'].map(type => <ChartButton
+            key={type}
+            type={type}
+            active={arrayData.chartType === type}
+            onClick={() => updateArray(arrayData.id, 'chartType', type)}
+          />)}
         </div>
 
         {/* Color picker - split circle */}
@@ -148,3 +128,28 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
 }
 
 export default InputRow;
+
+const ChartButton = ({ type, active, onClick }) => {
+  const getChartIcon = (type) => {
+    switch(type) {
+      case 'bar': return BarChart3;
+      case 'line': return TrendingUp;
+      case 'area': return Mountain;
+      default: return BarChart3;
+    }
+  };
+  const IconComponent = getChartIcon(type);
+  return (
+    <button
+      onClick={onClick}
+      className={`p-2 rounded-md transition-all ${
+        active
+          ? 'bg-blue-50 text-blue-600 shadow-sm' 
+          : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
+      }`}
+      title={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
+    >
+      <IconComponent size={16} />
+    </button>
+  );
+}
