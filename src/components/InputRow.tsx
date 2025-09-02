@@ -108,40 +108,29 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
         <div className="relative">
           <div 
             className="w-8 h-8 rounded-full border-2 border-white shadow-md cursor-pointer hover:scale-110 transition-transform"
-            style={{
-              background: `linear-gradient(180deg, ${arrayData.positiveColor} 50%, ${arrayData.negativeColor} 50%)`
-            }}
-            title="Click to change colors"
-            onClick={() => {
-              // Toggle a color picker popup or use hidden inputs
-              document.getElementById(`color-pos-${arrayData.id}`).click();
-            }}
+            style={{ background: arrayData.positiveColor }}
           >
             <input
-              id={`color-pos-${arrayData.id}`}
               type="color"
               value={arrayData.positiveColor}
               onChange={(e) => updateArray(arrayData.id, 'positiveColor', e.target.value)}
               className="absolute opacity-0 w-full h-full cursor-pointer"
               title="Positive values color"
             />
-            <input
-              id={`color-neg-${arrayData.id}`}
-              type="color"
-              value={arrayData.negativeColor}
-              onChange={(e) => updateArray(arrayData.id, 'negativeColor', e.target.value)}
-              className="absolute opacity-0 w-full h-full cursor-pointer"
-              title="Negative values color"
-              onClick={(e) => e.stopPropagation()}
-            />
           </div>
           {/* Small indicator for negative color */}
           <div 
             className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full border border-white cursor-pointer hover:scale-125 transition-transform"
             style={{ backgroundColor: arrayData.negativeColor }}
-            onClick={() => document.getElementById(`color-neg-${arrayData.id}`).click()}
-            title="Change negative color"
-          ></div>
+          >
+            <input
+              type="color"
+              value={arrayData.negativeColor}
+              onChange={(e) => updateArray(arrayData.id, 'negativeColor', e.target.value)}
+              className="absolute opacity-0 w-full h-full cursor-pointer"
+              title="Negative values color"
+            />
+          </div>
         </div>
       </div>
 
