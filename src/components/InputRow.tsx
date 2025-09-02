@@ -93,7 +93,7 @@ const InputRow = ({ arrayData, removeArray, updateArray, showTrash }) => {
                 onClick={() => updateArray(arrayData.id, 'chartType', type)}
                 className={`p-2 rounded-md transition-all ${
                   arrayData.chartType === type 
-                    ? 'bg-blue-500 text-white shadow-sm' 
+                    ? 'bg-blue-50 text-blue-600 shadow-sm' 
                     : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
                 }`}
                 title={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
